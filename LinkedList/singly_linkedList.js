@@ -146,7 +146,7 @@ class linkedList {
                 result += current.value
                 current = current.next;
             }
-            console.log(result);
+            console.log(`Sum of all node values is ${result}`);
         }
     }
 
@@ -265,6 +265,118 @@ class linkedList {
             }
         }
     }
+
+    //============================================ Find middle node value linkedlist ====================================
+
+    MiddleNode(){
+        if(this.isEmpty()){
+            return console.log(null);
+        } else{
+            //let middleindex = Math.floor(this.size/2);  // using Math.floor() method 
+            let middleindex = this.size%2==0 ? this.size/2 : (this.size-1)/2   // Without using Math.floor() method 
+            let currentIndex = 0;
+            let current = this.head;
+            while(current){
+                if(middleindex === currentIndex){
+                    return console.log(`Middle node value is ${current.value}`);
+                }
+                current = current.next;
+                currentIndex++;
+            }
+        }
+    }
+
+    //============================================ Remove duplicated in a sorted linkedlist ====================================
+    
+    RemoveDuplicateSort(){
+        if(this.isEmpty()){
+            return console.log(null);
+        } else{
+            let current = this.head;
+            while(current){
+                if (current.next && current.value === current.next.value) {
+                    current.next = current.next.next;
+                } else {
+                    current = current.next
+                }
+            }
+        }
+    }
+
+    //============================================ Remove duplicated in a un-sorted linkedlist ====================================
+    
+    RemoveDuplicate_Unsort() {
+        if (this.isEmpty()) {
+            return console.log(null);
+        } else {
+            let current = this.head;
+            let unique = new Set();
+            let prev = null;
+            while (current) {
+                if (unique.has(current.value)) {
+                    prev.next = current.next;
+                    current = current.next;
+                } else {
+                    unique.add(current.value);
+                    prev = current;
+                    current = current.next;
+                }
+            }
+        }
+    }
+
+    //============================================ Find the sum of last N nodes values in a linkedlist ====================================
+    
+    sumOfLast_N_values(n) {
+        if (this.isEmpty() || this.size < n) {
+            return console.log(null);
+        }
+        let current = this.head
+        let sum = 0;
+        if(this.size === n){
+            while(current){
+                sum += current.value;
+                current = current.next;
+            }
+            return console.log(`Sum of last ${n} node value is ${sum}`);
+        } else{
+            let startingNode = this.size - n+1;
+            let currentNode = 1
+            while(current){
+                if(currentNode >= startingNode){
+                    sum += current.value;
+                }
+                currentNode++;
+                current = current.next
+            }
+            return console.log(`Sum of last ${n} node value is ${sum}`);
+        }
+    }
+
+    //============================================ Unique elements in a linkedlist ====================================
+    
+    unique() {
+        if (this.isEmpty()) {
+            return console.log(null);
+        } else {
+            let seen = new Set();
+            let uniqueValues = new Set();
+            let current = this.head;
+            while (current) {
+                if (seen.has(current.value)) {
+                    uniqueValues.delete(current.value);
+                } else {
+                    seen.add(current.value);
+                    uniqueValues.add(current.value);
+                }
+                current = current.next;
+            }
+            console.log(`Unique values in this linked list are ${[...uniqueValues]}`);
+        }
+    }
+     
+
+    //====================================================================== End ========================================================================
 }
 
 const data = new linkedList();
@@ -272,17 +384,23 @@ data.addToFirst(10);
 data.addToFirst(30);
 data.addToFirst(40);
 data.addToLast(20);
+data.addToLast(20);
+data.addToLast(20);
 data.addToLast(90);
 data.addToLast(80);
+data.addToLast(80);
 data.addToLast(70);
-data.addToIndex(30 , 1);
-data.removeNode(1)
-data.deleteValue(40)
-data.sum();
-data.reverse();
-data.Stringreverse("ABCDEFGHIJ");
-data.largest();
-data.secondLarge();
-data.sumOf_MidThree();
-data.arrayToLinkedList([1,2,3,4,5,6,7])
-data.print()
+// data.addToIndex(30 , 1);
+// data.removeNode(1)
+// data.deleteValue(40)
+// data.sum();
+// data.reverse();
+// data.Stringreverse("ABCDEFGHIJ");
+// data.largest();
+// data.secondLarge();
+// data.sumOf_MidThree();
+// data.arrayToLinkedList([1,2,3,4,5,6,7])
+data.print();
+// data.MiddleNode()
+// data.sumOfLast_N_values(5)
+data.unique()
