@@ -269,21 +269,34 @@ class linkedList {
     //============================================ Find middle node value linkedlist ====================================
 
     MiddleNode(){
-        if(this.isEmpty()){
-            return console.log(null);
-        } else{
-            //let middleindex = Math.floor(this.size/2);  // using Math.floor() method 
-            let middleindex = this.size%2==0 ? this.size/2 : (this.size-1)/2   // Without using Math.floor() method 
-            let currentIndex = 0;
-            let current = this.head;
-            while(current){
-                if(middleindex === currentIndex){
-                    return console.log(`Middle node value is ${current.value}`);
-                }
-                current = current.next;
-                currentIndex++;
-            }
+
+        //-------------------------------------------------------Step 01----------------------------------------------------------------------------
+
+        // if(this.isEmpty()){
+        //     return console.log(null);
+        // } else{
+        //     //let middleindex = Math.floor(this.size/2);  // using Math.floor() method 
+        //     let middleindex = this.size%2==0 ? this.size/2 : (this.size-1)/2   // Without using Math.floor() method 
+        //     let currentIndex = 0;
+        //     let current = this.head;
+        //     while(current){
+        //         if(middleindex === currentIndex){
+        //             return console.log(`Middle node value is ${current.value}`);
+        //         }
+        //         current = current.next;
+        //         currentIndex++;
+        //     }
+        // }
+
+        //-------------------------------------------------------Step 02----------------------------------------------------------------------------
+
+        let head = this.head;
+        let tail = head;
+        while(tail != null && tail.next != null){
+            head = head.next;
+            tail = tail.next.next;
         }
+        return console.log(`Middle node value is ${head.value}`);
     }
 
     //============================================ Remove duplicated in a sorted linkedlist ====================================
@@ -293,8 +306,8 @@ class linkedList {
             return console.log(null);
         } else{
             let current = this.head;
-            while(current){
-                if (current.next && current.value === current.next.value) {
+            while(current && current.next){
+                if (current.value === current.next.value) {
                     current.next = current.next.next;
                 } else {
                     current = current.next
@@ -376,6 +389,23 @@ class linkedList {
     }
      
 
+    removeELement(element){
+        if(this.isEmpty()){
+            return console.log(null);
+        }
+        while(this.head != null && this.head.value === element){
+            this.head = this.head.next;
+        }
+        let current = this.head;
+        while(current != null && current.next != null){
+            if(current.next.value === element){
+                current.next = current.next.next;
+            } else{
+                current = current.next;
+            }
+        }
+    }
+
     //====================================================================== End ========================================================================
 }
 
@@ -403,4 +433,8 @@ data.addToLast(70);
 data.print();
 // data.MiddleNode()
 // data.sumOfLast_N_values(5)
-data.unique()
+// data.unique()
+// data.MiddleNode();
+// data.removeELement(80);
+data.RemoveDuplicateSort()
+data.print()
