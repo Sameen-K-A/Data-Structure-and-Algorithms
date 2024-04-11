@@ -1,23 +1,22 @@
-// // function reverseString(str) {
-// //     if (str === "") {
-// //         return "";
-// //     } else {
-// //         return reverseString(str.substr(1)) + str.charAt(0);
-// //     }
-// // }
-// // console.log(reverseString("Sameen"));
 
+//=========================================================== normal case =================================================================
 
+function reverse(string) {
+    if (string.length === 1) {
+        return string;
+    } else {
+        return string.split("").reverse().join("");
+    }
+}
+console.log(reverse("Sameen"));
 
-// function abc(str){
-//     if(str === ""){
-//         return null;
-//     } else{
+//======================================================= Recursion method ===============================================================
 
-//     }
-// }
-
-
-let ara = [1,2,3,4,5]
-delete ara[3];
-console.log(ara);
+function recursionReverse(string) {
+    if (string.length === 1) {
+        return string;
+    } else {
+        return recursionReverse(string.substring(1)) + string[0]
+    }
+}
+console.log(recursionReverse("Sameen"));
