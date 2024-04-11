@@ -1,17 +1,16 @@
-function insertionSort(arr) {
-    for (let i = 1; i < arr.length; i++) {
-        let current = arr[i];
+function selectionSort(array) {
+    for (let i = 1; i < array.length; i++) {
+        let current = array[i];
         let j = i - 1;
-        while (j >= 0 && arr[j] > current) {
-            arr[j + 1] = arr[j];
+        while (j >= 0 && array[j] > current) {
+            array[j + 1] = array[j];
             j--;
         }
-        arr[j + 1] = current;
+        array[j + 1] = current
     }
-    return arr;
+    return array
 }
 
-// Example usage:
-let array = [5, 2, 4, 6, 1, 3];
-console.log("Original array:", array);
-console.log("Sorted array:", insertionSort(array));
+const inputArray = [5, 8, 2, 9, 5, 3];
+console.log("input array is ",inputArray);
+console.log("Result is " , selectionSort(inputArray));
