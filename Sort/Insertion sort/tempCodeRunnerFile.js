@@ -1,2 +1,0 @@
-
-        let current = array[i];
