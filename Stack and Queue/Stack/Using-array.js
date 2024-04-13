@@ -2,12 +2,6 @@ class stack{
     constructor(){
         this.values = [];
     }
-    unshift(value){
-        this.values.unshift(value)
-    }
-    shift(){
-        this.values.shift()
-    }
     push(value){
         this.values.push(value)
     }
