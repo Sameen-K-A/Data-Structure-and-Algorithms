@@ -50,6 +50,10 @@ class Stack{
         return this.size;
     }
 
+    firstValue(){
+        return this.head !== null ? this.head.value : null;
+    }
+
     
 }
 
@@ -60,3 +64,4 @@ stack.push(70)
 stack.push(30)
 stack.print()
 console.log(stack.length());
+console.log(stack.firstValue());
