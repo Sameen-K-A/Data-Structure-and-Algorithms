@@ -155,6 +155,28 @@ class Tree {
         }
     }
 
+    min(root = this.root) {
+        if (root === null) {
+            return undefined;
+        } else {
+            while (root.left) {
+                root = root.left;
+            }
+            return root.value;
+        }
+    }
+
+    max(root = this.root) {
+        if (root === null) {
+            return undefined;
+        } else {
+            while (root.right) {
+                root= root.right;
+            }
+            return root.value;
+        }
+    }
+
     deleteNode(value, root = this.root, parent = null) {
         if (root === null || this.search(value) === false) {
             return console.log("Value not founded");
@@ -178,6 +200,14 @@ class Tree {
                 } else {
                     parent = this.left ? this.left : this.right;
                 }
+                return true;
+            }
+
+            //Delete node contain 2 nodes
+            if(root.right !== null && root.left !== null) {
+                const smallest = this.min(root.right);
+                root.value = smallest;
+                this.deleteNode(smallest , root.right);
                 return true;
             }
         }
