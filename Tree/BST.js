@@ -123,22 +123,22 @@ class Tree {
     */
 
 
-    // levelOrder(root = this.root) {
-    //     const queue = [];
-    //     queue.push(root);
-    //     while (queue.length !== 0) {
-    //         let current = queue.shift();
-    //         console.log(current.value);
-    //         if (current.left) {                          // using array method don't suggested
-    //             queue.push(current.left)
-    //         }
-    //         if (current.right) {
-    //             queue.push(current.right)
-    //         }
-    //     }
-    // }
+    levelOrder_01(root = this.root) {
+        const queue = [];
+        queue.push(root);
+        while (queue.length !== 0) {
+            let current = queue.shift();
+            console.log(current.value);
+            if (current.left) {                          // using array method don't suggested
+                queue.push(current.left)
+            }
+            if (current.right) {
+                queue.push(current.right)
+            }
+        }
+    }
 
-    levelOrder(root = this.root) {
+    levelOrder_02(root = this.root) {
         if (root) {
             const queue = new Queue();
             queue.enqueue(root);
@@ -155,12 +155,38 @@ class Tree {
         }
     }
 
+    deleteNode(value, root = this.root, parent = null) {
+        if (root === null || this.search(value) === false) {
+            return console.log("Value not founded");
+        }
+        if (value < root.value) {
+            return this.deleteNode(value, root.left, root);
+        } else if (value > root.value) {
+            return this.deleteNode(value, root.right, root);
+        } else {
+
+            // Delete leaf nodes, meaning nodes that have no children; left and right are null.
+            if (root.left === null && root.right === null) {
+                root = null;
+                return true;
+            }
+
+            // Delete a node only contain one single subtree (left or right)
+            if (root.left === null || root.right === null) {
+                if (parent === null) {
+                    this.root = this.left ? this.left : this.right;
+                } else {
+                    parent = this.left ? this.left : this.right;
+                }
+                return true;
+            }
+        }
+    }
 }
 
 const a = new Tree();
 a.insert(50)
 a.insert(70)
-a.insert(60)
 a.insert(80)
 a.insert(20)
 a.insert(10)
