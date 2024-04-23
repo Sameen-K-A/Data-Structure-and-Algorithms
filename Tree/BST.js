@@ -171,7 +171,7 @@ class Tree {
             return undefined;
         } else {
             while (root.right) {
-                root= root.right;
+                root = root.right;
             }
             return root.value;
         }
@@ -204,13 +204,37 @@ class Tree {
             }
 
             //Delete node contain 2 nodes
-            if(root.right !== null && root.left !== null) {
+            if (root.right !== null && root.left !== null) {
                 const smallest = this.min(root.right);
                 root.value = smallest;
-                this.deleteNode(smallest , root.right);
+                this.deleteNode(smallest, root.right);
                 return true;
             }
         }
+    }
+
+    /*
+        Here is a function to find the nearest value to the given value. Also, I use Math.abs(), 
+        which is used to find the absolute value. For example, if we have a number like -17, the absolute value of -17 is 17.
+    */
+
+    nearestValue(value, root = this.root) {
+        let result = null;
+        const check = (node) => {
+            if (node === null) {
+                return;
+            }
+            if (result === null || Math.abs(node.value - value) < Math.abs(result - value)) {
+                result = node.value
+            }
+            if (value > node.value) {
+                check(node.right)
+            } else if (value < node.value) {
+                check(node.left)
+            }
+        }
+        check(root);
+        return result;
     }
 }
 
@@ -221,3 +245,5 @@ a.insert(80)
 a.insert(20)
 a.insert(10)
 a.insert(30)
+
+console.log(a.nearestValue(-20));
