@@ -40,6 +40,7 @@ class minHeap {
             return this.heap = [];
         }
         this.heap[0] = this.heap[this.heap.length - 1];
+        this.heap.pop()
         this.heapifyDown(0);
     }
 

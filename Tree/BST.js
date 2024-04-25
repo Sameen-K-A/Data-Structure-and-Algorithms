@@ -178,7 +178,7 @@ class Tree {
     }
 
     deleteNode(value, root = this.root, parent = null) {
-        if (root === null || this.search(value) === false) {
+        if (root === null) {
             return console.log("Value not founded");
         }
         if (value < root.value) {
@@ -189,16 +189,28 @@ class Tree {
 
             // Delete leaf nodes, meaning nodes that have no children; left and right are null.
             if (root.left === null && root.right === null) {
-                root = null;
-                return true;
+                if (parent === null) {
+                    this.root = null;
+                } else {
+                    if (parent.left === root) {
+                        parent.left = null;
+                    } else {
+                        parent.right = null;
+                    }
+                }
             }
 
             // Delete a node only contain one single subtree (left or right)
             if (root.left === null || root.right === null) {
+                const child = root.left !== null ? root.left : root.right;
                 if (parent === null) {
-                    this.root = this.left ? this.left : this.right;
+                    this.root = child;
                 } else {
-                    parent = this.left ? this.left : this.right;
+                    if(parent.left === root) {
+                        parent.left = child
+                    } else {
+                        parent.right = child;
+                    }
                 }
                 return true;
             }
@@ -245,5 +257,5 @@ a.insert(80)
 a.insert(20)
 a.insert(10)
 a.insert(30)
-
-console.log(a.nearestValue(-20));
+a.deleteNode(50)
+console.log(a);
